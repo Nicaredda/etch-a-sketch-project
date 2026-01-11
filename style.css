@@ -1,0 +1,12 @@
+
+.container {
+
+}
+
+.rows {
+    display: flex;
+}
+.squares {
+    border: 1px solid black;
+    padding: 16px;
+}

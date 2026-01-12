@@ -1,12 +1,15 @@
 
 .container {
-
+    border: 1px solid black;
+    width: 960px;
 }
 
 .rows {
     display: flex;
+    width:max-content;
+    height: max-content;
 }
+
 .squares {
-    border: 1px solid black;
-    padding: 16px;
+    padding: 5px;
 }

@@ -1,9 +1,4 @@
 
-
-// the assignment is asking us to make a 16*16 squares grid, 
-// therefore we will create 16 rows. Each of the rows is a single container 
-// that contains 16 others squares
-
 function inputSquare() {  
     inputtedSquares = prompt("How many squares do you need?");
     if (inputtedSquares<=100){
@@ -15,21 +10,48 @@ function inputSquare() {
     return inputtedSquares;
 }
 
-function rainbowPencil(squares) {
-    function randomNumber(){
-        
+function blackPencil() {
+    blackP = true;
+    rainbowP = false;
+    fadingP = false;
+    const squares = document.querySelectorAll(".squares");
+    for (let s=0;s<squares.length;s++) {
+        squares[s].addEventListener("mouseover", (event) => {
+            event.target.style.backgroundColor = "rgb(0,0,0)";
+        })
     }
+}
+
+// Needed for the rainbowPencil function
+function randomNumber(){
     let rNum = Math.floor(Math.random() * 255);
-    squares.addEventListener("mouseover", (event) => {
-        event.target.style.backgroundColor = `rgb(${rNum},${rNum},${rNum})`;
-    })
+    return rNum;
+}
+
+function rainbowPencil() {
+    blackP = false;
+    rainbowP = true;
+    fadingP = false;
+    const squares = document.querySelectorAll(".squares");
+    for (let s=0;s<squares.length;s++) {
+        squares[s].addEventListener("mouseover", (event) => {
+            event.target.style.backgroundColor = `rgb(${randomNumber()},${randomNumber()},${randomNumber()})`;
+        })
+    }
 }
 
 
-function blackPencil(squares) {
-    squares.addEventListener("mouseover", (event) => {
-        event.target.style.backgroundColor = "black";
-    })
+function fadingPencil() {
+    blackP = false;
+    rainbowP = false; 
+    fadingP = true;
+    const squares = document.querySelectorAll(".squares");
+    for (let s=0;s<squares.length;s++) {
+        let fNumber = 0.100;
+        squares[s].addEventListener("mouseover", (event) => {
+            event.target.style.backgroundColor = `rgba(0,0,0,${fNumber+=0.100})`;
+        })
+    }
 }
 
 function makerGrid() {
@@ -39,11 +61,12 @@ function makerGrid() {
         rows.className = "rows";
         container.append(rows);
         for (let n=0;n<inputtedSquares;n++){
-            const squares = document.createElement("div");
+            squares = document.createElement("div");
             squares.className = "squares";
-            rainbowPencil(squares);
+            squares.style.width = `${960/inputtedSquares}`
+            squares.style.height = `${960/inputtedSquares}`
             rows.append(squares);
-        }
+        } 
     }
 }
 
@@ -52,10 +75,9 @@ function removeGrid() {
     rows.forEach((row) => row.remove());
 }
 
-function program() {
-    inputSquare();
-    makerGrid();
-}
+let blackP = false;
+let rainbowP = false;
+let fadingP = false;
 
 const btnGrid = document.querySelector("#changeGrid")
 btnGrid.addEventListener("click", inputSquare);
@@ -63,10 +85,17 @@ btnGrid.addEventListener("click", inputSquare);
 const btnRainbow = document.querySelector("#rainbow")
 btnRainbow.addEventListener("click", rainbowPencil)
 
+const btnBlack = document.querySelector("#black")
+btnBlack.addEventListener("click", blackPencil)
+
+const btnFading = document.querySelector("#fading")
+btnFading.addEventListener("click", fadingPencil)
+
 const body = document.querySelector("body");
 const container = document.querySelector(".container");
 
-program();
 
 
 
+
+inputSquare();

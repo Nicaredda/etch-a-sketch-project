@@ -16,8 +16,8 @@ function blackPencil() {
     fadingP = false;
     const squares = document.querySelectorAll(".squares");
     for (let s=0;s<squares.length;s++) {
-        squares[s].addEventListener("mouseover", (event) => {
-            event.target.style.backgroundColor = "rgb(0,0,0)";
+        squares[s].addEventListener("mouseover", (mouseover) => {
+            mouseover.target.style.backgroundColor = "rgb(0,0,0)";
         })
     }
 }
@@ -34,8 +34,8 @@ function rainbowPencil() {
     fadingP = false;
     const squares = document.querySelectorAll(".squares");
     for (let s=0;s<squares.length;s++) {
-        squares[s].addEventListener("mouseover", (event) => {
-            event.target.style.backgroundColor = `rgb(${randomNumber()},${randomNumber()},${randomNumber()})`;
+        squares[s].addEventListener("mouseover", (mouseover) => {
+            mouseover.target.style.backgroundColor = `rgb(${randomNumber()},${randomNumber()},${randomNumber()})`;
         })
     }
 }
@@ -48,11 +48,12 @@ function fadingPencil() {
     const squares = document.querySelectorAll(".squares");
     for (let s=0;s<squares.length;s++) {
         let fNumber = 0.100;
-        squares[s].addEventListener("mouseover", (event) => {
-            event.target.style.backgroundColor = `rgba(0,0,0,${fNumber+=0.100})`;
+        squares[s].addEventListener("mouseover", (mouseover) => {
+            mouseover.target.style.backgroundColor = `rgba(0,0,0,${fNumber+=0.100})`;
         })
     }
 }
+
 
 function makerGrid() {
     removeGrid();
@@ -63,8 +64,6 @@ function makerGrid() {
         for (let n=0;n<inputtedSquares;n++){
             squares = document.createElement("div");
             squares.className = "squares";
-            squares.style.width = `${960/inputtedSquares}`
-            squares.style.height = `${960/inputtedSquares}`
             rows.append(squares);
         } 
     }
